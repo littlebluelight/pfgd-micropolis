@@ -51,7 +51,8 @@ class BuildingTool extends ToolStroke
 
 		case AIRPORT:
 			return applyZone(eff, AIRPORT);
-
+		
+	
 		default:
 			// not expected
 			throw new Error("unexpected tool: "+tool);
