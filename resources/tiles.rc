@@ -1009,4 +1009,5 @@
 957   misc_animation@0,2080
 958   misc_animation@0,2096
 959   misc_animation@0,2112
-# BEGIN FAST FOOD #
+# BEGIN MONUMENT #
+965   monument@0,0			(bulldozable)(description=#19)
