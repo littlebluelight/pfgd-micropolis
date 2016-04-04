@@ -125,7 +125,8 @@ public class Micropolis
 	int nuclearCount;
 	int seaportCount;
 	int airportCount;
-
+	int monumentCount;
+	
 	int totalPop;
 	int lastCityPop;
 
@@ -538,6 +539,7 @@ public class Micropolis
 		nuclearCount = 0;
 		seaportCount = 0;
 		airportCount = 0;
+		monumentCount = 0;
 		powerPlants.clear();
 
 		for (int y = 0; y < fireStMap.length; y++) {
@@ -873,13 +875,15 @@ public class Micropolis
 			}
 		}
 
-		if (count != 0)
-			crimeAverage = sum / count;
-		else
+		if (count != 0){
+			crimeAverage = (int) ((sum / count)+(0.005*monumentCount));
+		}
+		else{
 			crimeAverage = 0;
-
+		}
 		fireMapOverlayDataChanged(MapState.POLICE_OVERLAY);
 	}
+
 
 	void doDisasters()
 	{
@@ -1277,6 +1281,7 @@ public class Micropolis
 	{
 		double normResPop = (double)resPop / 8.0;
 		totalPop = (int) (normResPop + comPop + indPop);
+	
 
 		double employment;
 		if (normResPop != 0.0)

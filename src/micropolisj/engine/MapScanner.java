@@ -87,13 +87,15 @@ class MapScanner extends TileBehavior
 			
 		case MONUMENT:
 			doMonument();
+			return;
+			
 		default:
 			assert false;
 		}
 	}
 
 	private void doMonument() {
-		System.out.print("you did it!");
+		city.monumentCount++;
 		
 	}
 
