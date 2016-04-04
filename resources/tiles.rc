@@ -1011,4 +1011,4 @@
 959   misc_animation@0,2112
 
 #monuments#
-965   monument@0,0 			(bulldozable)
+965   monument@0,0 			(zone)(bulldozable)(behavior=ROAD)

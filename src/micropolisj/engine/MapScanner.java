@@ -41,7 +41,7 @@ class MapScanner extends TileBehavior
 		STADIUM_EMPTY,
 		STADIUM_FULL,
 		AIRPORT,
-		SEAPORT;
+		SEAPORT, MONUMENT;
 	}
 
 	@Override
@@ -84,9 +84,22 @@ class MapScanner extends TileBehavior
 		case SEAPORT:
 			doSeaport();
 			return;
+			
+		case MONUMENT:
+			doMonument();
 		default:
 			assert false;
 		}
+	}
+
+	private void doMonument() {
+		System.out.print("you did it!");
+		
+	}
+
+	private void print(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	boolean checkZonePower()
