@@ -76,6 +76,9 @@ public class ToolStroke
 
 		case INDUSTRIAL:
 			return applyZone(eff, INDCLR);
+		
+		case MONUMENT:
+			return applyMonumentTool(eff);
 
 		default:
 			// not expected
@@ -230,6 +233,41 @@ public class ToolStroke
 		eff.setTile(0, 0, tile);
 
 		return true;
+	}
+	
+	boolean applyMonumentTool(ToolEffectIfc eff)
+	{
+		int cost = tool.getToolCost();
+
+		if (eff.getTile(0, 0) != DIRT) {
+			// some sort of bulldozing is necessary
+			if (!city.autoBulldoze) {
+				eff.toolResult(ToolResult.UH_OH);
+				return false;
+			}
+
+			//FIXME- use a canAutoBulldoze-style function here
+			if (isRubble(eff.getTile(0, 0))) {
+				// this tile can be auto-bulldozed
+				cost++;
+			}
+			else {
+				// cannot be auto-bulldozed
+				eff.toolResult(ToolResult.UH_OH);
+				return false;
+			}
+		}
+
+		
+		int tile;
+		tile = MONUMENT;
+
+		eff.spend(cost);
+		eff.setTile(0, 0, tile);
+
+		return true;
+		
+		
 	}
 
 	protected void fixZone(int xpos, int ypos)
