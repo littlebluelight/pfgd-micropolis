@@ -78,7 +78,7 @@ public class ToolStroke
 			return applyZone(eff, INDCLR);
 		
 		case MONUMENT:
-			return applyMonumentTool(eff,xPosition,yPosition);
+			return applyMonumentTool(eff);
 
 		default:
 			// not expected
@@ -254,8 +254,10 @@ public class ToolStroke
 	}
 
 	
-	boolean applyMonumentTool(ToolEffectIfc eff,int xPosition, int yPosition)
+	boolean applyMonumentTool(ToolEffectIfc eff)
 	{
+		int xPosition = xdest;
+		int yPosition = ydest;
 		int cost = tool.getToolCost();
 
 		if (eff.getTile(0, 0) != DIRT) {
