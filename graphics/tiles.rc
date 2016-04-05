@@ -1012,3 +1012,6 @@
 
 #monuments#
 960   monument@0,0 			(bulldozable)
+961	  monument@16,0			(bulldozable)
+962	  monument@0,16			(bulldozable)
+963	  monument@16,16		(bulldozable)

@@ -876,7 +876,7 @@ public class Micropolis
 		}
 
 		if (count != 0){
-			crimeAverage = (int) ((sum / count)+(0.005*monumentCount));
+			crimeAverage = (int) ((sum / count)*(1+(0.00005*monumentCount)));
 		}
 		else{
 			crimeAverage = 0;
