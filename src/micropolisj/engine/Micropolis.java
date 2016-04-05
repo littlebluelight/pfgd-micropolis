@@ -1293,7 +1293,7 @@ public class Micropolis
 			employment = 1;
 		}
 
-		double migration = normResPop * (employment - 1);
+		double migration = normResPop * (employment - 1)*(1+(0.00005*monumentCount));
 		final double BIRTH_RATE = 0.02;
 		double births = (double)normResPop * BIRTH_RATE;
 		double projectedResPop = normResPop + migration + births;
