@@ -56,12 +56,12 @@ public class ToolStroke
 
 		for (int i = 0; i < r.height; i += tool.getHeight()) {
 			for (int j = 0; j < r.width; j += tool.getWidth()) {
-				apply1(new TranslatedToolEffect(eff, r.x+j, r.y+i));
+				apply1(new TranslatedToolEffect(eff, r.x+j, r.y+i),0,0);
 			}
 		}
 	}
 
-	boolean apply1(ToolEffectIfc eff)
+	boolean apply1(ToolEffectIfc eff, int xPosition, int yPosition)
 	{
 		switch (tool)
 		{
@@ -78,7 +78,7 @@ public class ToolStroke
 			return applyZone(eff, INDCLR);
 		
 		case MONUMENT:
-			return applyMonumentTool(eff);
+			return applyMonumentTool(eff,xPosition,yPosition);
 
 		default:
 			// not expected
@@ -235,7 +235,26 @@ public class ToolStroke
 		return true;
 	}
 	
-	boolean applyMonumentTool(ToolEffectIfc eff)
+	boolean roadTest(int tx, int ty)
+	{
+		if (!city.testBounds(tx, ty)) {
+			return false;
+		}
+
+		char c = city.getTile(tx, ty);
+
+		if (c < ROADBASE)
+			return false;
+		else if (c > LASTRAIL)
+			return false;
+		else if (c >= POWERBASE && c < LASTPOWER)
+			return false;
+		else
+			return true;
+	}
+
+	
+	boolean applyMonumentTool(ToolEffectIfc eff,int xPosition, int yPosition)
 	{
 		int cost = tool.getToolCost();
 
@@ -257,16 +276,33 @@ public class ToolStroke
 				return false;
 			}
 		}
+		
+		int [] xmod = { -1, 0, 1, -1, 1, -1, 0, 1 };
+		int [] ymod = { -1, -1, -1, 0, 0, 1, 1, 1 };
+		int roadAdjacent = 0;
+		for (int z = 0; z < 8; z++)
+		{
+			int tx = xPosition + xmod[z];
+			int ty = yPosition + ymod[z];
+
+			if (roadTest(tx,ty)==true)
+			{
+				roadAdjacent = 1;
+			}
+		}
 
 		
 		int tile;
-		tile = MONUMENT;
-
+		if (roadAdjacent == 1){
+			tile = MONUMENT;
+		}
+		else{
+			tile = FOUNTAIN;
+		}
 		eff.spend(cost);
 		eff.setTile(0, 0, tile);
 
 		return true;
-		
 		
 	}
 

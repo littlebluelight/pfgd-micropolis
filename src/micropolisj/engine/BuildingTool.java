@@ -27,7 +27,7 @@ class BuildingTool extends ToolStroke
 	}
 
 	@Override
-	boolean apply1(ToolEffectIfc eff)
+	boolean apply1(ToolEffectIfc eff,int xPosition,int yPosition)
 	{
 		switch (tool)
 		{
